@@ -22,46 +22,50 @@
             </a>
         </div>
 
-        <div class="bg-white pixel-border p-4">
-            <table class="w-full border-collapse">
-                <thead class="bg-blue-500">
-                    <tr>
-                        <th class="p-2 text-left text-xs text-white border-4 border-black">Title</th>
-                        <th class="p-2 text-left text-xs text-white border-4 border-black">Description</th>
-                        <th class="p-2 text-left text-xs text-white border-4 border-black">Status</th>
-                        <th class="p-2 text-left text-xs text-white border-4 border-black">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($tasks as $task)
-                    <tr class="border-4 border-black">
-                        <td class="p-2 border-4 border-black">{{$task->title}}</td>
-                        <td class="p-2 border-4 border-black">{{$task->description}}</td>
-                        <td class="p-2 border-4 border-black">
-                            @if($task->completed == 1)
-                                <span class="px-2 py-1 bg-green-500 text-white">Done</span>
-                            @else
-                                <span class="px-2 py-1 bg-red-500 text-white">Waiting</span>
-                            @endif
-                        </td>
-                        <td class="p-2 border-4 border-black">
-                            <div class="flex flex-col space-y-2">
-                                <a href="{{ route('tasks.edit', $task->id) }}" class="inline-block bg-blue-500 text-white text-xs px-2 py-1 pixel-border hover:bg-blue-600 transition-colors text-center">
-                                    Edit
-                                </a>
-                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="w-full bg-red-500 text-white text-xs px-2 py-1 pixel-border hover:bg-red-600 transition-colors" onclick="return confirm('Are you sure you want to delete this task?')">
-                                        Delete
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="flex justify-center">
+            <div class="bg-white pixel-border p-4 inline-block">
+                <table class="w-full border-collapse">
+                    <thead class="bg-blue-500">
+                        <tr>
+                            <th class="p-2 text-left text-xs text-white border-4 border-black">Title</th>
+                            <th class="p-2 text-left text-xs text-white border-4 border-black">Description</th>
+                            <th class="p-2 text-left text-xs text-white border-4 border-black">Category</th>
+                            <th class="p-2 text-left text-xs text-white border-4 border-black">Status</th>
+                            <th class="p-2 text-left text-xs text-white border-4 border-black">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($tasks as $task)
+                        <tr class="border-4 border-black">
+                            <td class="p-2 border-4 border-black">{{$task->title}}</td>
+                            <td class="p-2 border-4 border-black">{{$task->description}}</td>
+                            <td class="p-2 border-4 border-black">{{$task->taskCategory ? $task->taskCategory->name : 'N/A'}}</td>
+                            <td class="p-2 border-4 border-black">
+                                @if($task->completed == 1)
+                                    <span class="px-2 py-1 bg-green-500 text-white">Done</span>
+                                @else
+                                    <span class="px-2 py-1 bg-red-500 text-white">Waiting</span>
+                                @endif
+                            </td>
+                            <td class="p-2 border-4 border-black">
+                                <div class="flex flex-col space-y-2">
+                                    <a href="{{ route('tasks.edit', $task->id) }}" class="inline-block bg-blue-500 text-white text-xs px-2 py-1 pixel-border hover:bg-blue-600 transition-colors text-center">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="w-full bg-red-500 text-white text-xs px-2 py-1 pixel-border hover:bg-red-600 transition-colors" onclick="return confirm('Are you sure you want to delete this task?')">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>
