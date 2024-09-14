@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Task;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\TaskCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -89,8 +89,16 @@ class TaskSeeder extends Seeder
             ],
         ];
 
+        $categories = TaskCategory::pluck('id')->toArray();
+
         foreach ($tasks as $task) {
-            DB::table('tasks')->insert($task);
+            DB::table('tasks')->insert([
+                'title' => $task['title'],
+                'description' => $task['description'],
+                'completed' => $task['completed'],
+                'category_id' => $categories[array_rand($categories)],
+            ]);
+           
         }
     }
 }

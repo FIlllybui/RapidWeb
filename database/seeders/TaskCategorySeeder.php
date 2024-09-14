@@ -9,6 +9,21 @@ class TaskCategorySeeder extends Seeder
 {
     public function run()
     {
-        TaskCategory::factory()->count(5)->create();
+        $categories = [
+            'Work',
+            'Personal',
+            'Home',
+            'Health',
+            'Finance',
+            'Education',
+            'Hobbies',
+            'Social',
+            'Errands',
+            'Projects',
+        ];
+
+        foreach ($categories as $category) {
+            TaskCategory::create(['name' => $category]);
+        }
     }
 }
