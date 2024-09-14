@@ -32,6 +32,15 @@
                         <option value="1">Done</option>
                     </select>
                 </div>
+                <div class="mb-4">
+                    <label for="category_id" class="block text-sm font-bold mb-2">Category</label>
+                    <select id="category_id" name="category_id" class="w-full p-2 border-4 border-black">
+                        <option value="">Select a category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="text-center">
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 border-4 border-black">Create Task</button>
                 </div>
